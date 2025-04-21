@@ -45,10 +45,19 @@ def playerPhys():
     damageRoll = random.randint(1,player.physDamage)
     if defRoll > currentEnemy.defense:
         currentEnemy.hp -= damageRoll
+        print("You dealt ",damageRoll,"damage")
     else:
-        print("You")
+        print("You didn't hit")
 
 def playerSpec():
+    global currentEnemy
+    defRoll = random.randint(1,20)
+    damageRoll = random.randint(1,player.specDamage)
+    if defRoll > currentEnemy.defense:
+        currentEnemy.hp -= damageRoll
+        print("You dealt ",damageRoll,"damage")
+    else:
+        print("You didn't hit")
 
 def playerAction():
     try:
@@ -59,7 +68,9 @@ def playerAction():
     if action == 1:
         playerPhys()
     if action == 2:
-        playerSpec
+        playerSpec()
 
 chooseEnemy()
+showStats()
+playerAction()
 showStats()
