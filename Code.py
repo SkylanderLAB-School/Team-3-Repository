@@ -126,7 +126,7 @@ inCombat = False
 construct = Character("Construct",70,70,3,5,12,None,None)
 
 #Enemies
-owlBear = Enemy("Owl Bear",20,20,6,2,10,10,25,None,"poison",None,None)
+owlBear = Enemy("Owl Bear",120,120,6,2,10,10,25,None,"poison",None,None)
 enemyList = [owlBear]
 
 #Weapons
@@ -284,6 +284,7 @@ def enemyMagicAttack():
 def startCombat(enemyChoice):
     global currentCharacter
     global currentEnemy
+    global inCombat
     inCombat = True
     currentEnemy = enemyChoice
     print("You have encountered a ",currentEnemy.name)
