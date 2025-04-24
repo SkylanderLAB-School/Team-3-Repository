@@ -126,7 +126,7 @@ inCombat = False
 construct = Character("Construct",70,70,3,5,12,None,None)
 
 #Enemies
-owlBear = Enemy("Owl Bear",120,120,6,2,10,10,25,None,"poison",None,None)
+owlBear = Enemy("Owl Bear",20,20,6,2,10,10,25,None,"poison",None,None)
 enemyList = [owlBear]
 
 #Weapons
@@ -156,7 +156,8 @@ def showFightStats():
 
 def checkDeath():
     global currentCharacter
-    global currentCharacter
+    global currentEnemy
+    global inCombat
     if currentEnemy.hp < 1:
         inCombat = False
         print("You killed ",currentEnemy.name)
@@ -243,12 +244,12 @@ def enemyWeaponAttack():
         damage = random.randint(1,currentEnemy.strengthRoll) + currentEnemy.strength
         currentCharacter.dealDamage(damage)
         print(currentEnemy.name, " dealt ", damage, "damage")
-        if currentEnemy.strenthStatus == "burn":
+        if currentEnemy.strengthStatus == "burn":
             currentCharacter.currentStatus = "burn"
             currentCharacter.statusLevel = 10
             print(currentEnemy.name," inflicts Burn")
             time.sleep(1)
-        if currentEnemy.strenthStatus == "poison":
+        if currentEnemy.strengthStatus == "poison":
             currentCharacter.currentStatus = "poison"
             currentCharacter.statusLevel = 10
             print(currentEnemy.name," inflicts Poison")
