@@ -63,6 +63,15 @@ class Character:
             self.statusLevel = 0
             self.currentStatus = None
         time.sleep(1)
+    def bleed(self):
+        self.hp -= self.statusLevel
+        print("You bleed ", self.statusLevel, "damage")
+        self.statusLevel -= 1
+        if self.statusLevel < 1:
+            print("You no longer bleeding")
+            self.statusLevel = 0
+            self.currentStatus = None
+        time.sleep(1)
 
 
 #Enemy Class
@@ -100,6 +109,15 @@ class Enemy:
             self.statusLevel = 0
             self.currentStatus = None
         time.sleep(1)
+    def poison(self):
+        self.hp -= self.statusLevel
+        print(self.name, " bleed for ", self.statusLevel, " damage")
+        self.statusLevel -= 1
+        if self.statusLevel < 1:
+            print(self.name,"is no longer bleeding")
+            self.statusLevel = 0
+            self.currentStatus = None
+        time.sleep(1)
 
 #Weapon Class
 class Weapon:
@@ -123,10 +141,10 @@ skill = None
 inCombat = False
 
 #Characters
-construct = Character("Construct",70,70,3,5,12,None,None)
+construct = Character("Construct",70,70,3,5,8,None,None)
 
 #Enemies
-owlBear = Enemy("Owl Bear",120,120,6,2,10,10,25,None,"poison",None,None)
+owlBear = Enemy("Owl Bear",120,120,6,2,9,10,25,"bleed","poison",None,None)
 enemyList = [owlBear]
 
 #Weapons
@@ -199,6 +217,11 @@ def playerWeaponAttack():
             currentEnemy.statusLevel = 10
             print("You inflict Poison")
             time.sleep(1)
+        if heldWeapon.status == "bleed":
+            currentEnemy.currentStatus = "bleed"
+            currentEnemy.statusLevel = 5
+            print("You inflict Bleed")
+            time.sleep(1)
     else:
         print("You miss")
     time.sleep(1)
@@ -221,6 +244,11 @@ def playerMagicAttack():
             currentEnemy.currentStatus = "poison"
             currentEnemy.statusLevel = 10
             print("You inflict Poison")
+            time.sleep(1)
+        if skill.status == "bleed":
+            currentEnemy.currentStatus = "bleed"
+            currentEnemy.statusLevel = 5
+            print("You inflict Bleed")
             time.sleep(1)
     else:
         print("You miss")
@@ -254,6 +282,11 @@ def enemyWeaponAttack():
             currentCharacter.statusLevel = 10
             print(currentEnemy.name," inflicts Poison")
             time.sleep(1)
+        if currentEnemy.strengthStatus == "bleed":
+            currentCharacter.currentStatus = "bleed"
+            currentCharacter.statusLevel = 5
+            print(currentEnemy.name," inflicts Bleed")
+            time.sleep(1)
     else:
         print(currentEnemy.name," missed")
     time.sleep(1)
@@ -275,6 +308,11 @@ def enemyMagicAttack():
             currentCharacter.currentStatus = "poison"
             currentCharacter.statusLevel = 10
             print(currentEnemy.name," inflicts Poison")
+            time.sleep(1)
+        if currentEnemy.magicStatus == "bleed":
+            currentCharacter.currentStatus = "bleed"
+            currentCharacter.statusLevel = 10
+            print(currentEnemy.name," inflicts Bleed")
             time.sleep(1)
     else:
         print(currentEnemy.name," missed")
@@ -308,6 +346,8 @@ def checkStatusPlayer():
             currentCharacter.burn()
         if currentCharacter.currentStatus == "poison":
             currentCharacter.poison()
+        if currentCharacter.currentStatus == "bleed":
+            currentCharacter.bleed()
 
 def checkStatusEnemy():
     global currentCharacter
@@ -317,6 +357,8 @@ def checkStatusEnemy():
             currentEnemy.burn()
         if currentEnemy.currentStatus == "poison":
             currentEnemy.poison()
+        if currentEnemy.currentStatus == "bleed":
+            currentEnemy.bleed()
 
 chooseCharacter()
 startCombat(owlBear)
