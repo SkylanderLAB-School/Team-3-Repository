@@ -35,5 +35,5 @@ drgon = Enemy("Agheel", 200, 250, 60, 90, 33, "Dragon", "Elden Ring")
 Golm = Enemy("Golem", 100, 100, 13, 6, 2, "Tank", "Somewhere")
 krkn = Enemy("Kraken", 200, 200, 12, 4, 5, "Big Squid boi", "The Ocean")
 #[] = Enemy()
-#[] = Enemy()
+#[] = Enemy()wow
 #[] = Enemy()
