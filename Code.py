@@ -151,7 +151,7 @@ def chooseCharacter():
         heldWeapon = fireAxe
     elif characterChoice == 3:
         currentCharacter = goblin
-        skill = daggerThrow
+        skill = poisonPotion
         heldWeapon = dagger
     else:
         chooseCharacter()
