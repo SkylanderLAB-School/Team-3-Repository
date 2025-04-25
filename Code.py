@@ -415,5 +415,5 @@ currentCharacter.hp = currentCharacter.hpMax
 time.sleep(3)
 startCombat(asj)
 currentCharacter.hp = currentCharacter.hpMax
-time.sleep(3)
+time.sleep(2)
 startCombat(dragon)
