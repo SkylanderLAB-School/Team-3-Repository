@@ -1,34 +1,3 @@
-import random
-import time
-from asyncio import current_task
-
-
-#character class
-class Character:
-    def __init__(self,maxhp,hp,strength,wisdom,defense):
-        self.maxhp = maxhp
-        self.hp = hp
-        self.strength = strength
-        self.wisdom = wisdom
-        self.defense = defense
-
-
-#weapon class
-weapon = 0
-class Weapon:
-    def __init__(self,name,Damage,Status):
-        self.name = name
-        self.Damage = Damage
-        self.Status = Status
-
-#skill class
-skill = 0
-class Skill:
-    def __init__(self,name,Damage,Status):
-        self.name = name
-        self.Damage = Damage
-        self.Status = Status
-
 import time
 import random
 
@@ -45,6 +14,8 @@ class Character:
         self.statusLevel = statusLevel
     def dealDamage(self, amount):
         self.hp -= amount
+    def maxHeal(self):
+        self.hp = self.hpMax
     def burn(self):
         self.hp -= self.statusLevel
         print("You were burned for ", self.statusLevel, "damage")
@@ -109,7 +80,7 @@ class Enemy:
             self.statusLevel = 0
             self.currentStatus = None
         time.sleep(1)
-    def poison(self):
+    def bleed(self):
         self.hp -= self.statusLevel
         print(self.name, " bleed for ", self.statusLevel, " damage")
         self.statusLevel -= 1
@@ -121,17 +92,19 @@ class Enemy:
 
 #Weapon Class
 class Weapon:
-    def __init__(self, attackName,damageRoll,status):
+    def __init__(self, attackName,damageRoll,status,name):
         self.attackName = attackName
         self.damageRoll = damageRoll
         self.status = status
+        self.name = name
 
 #Skill Class
 class Skill:
-    def __init__(self, attackName,damageRoll,status):
+    def __init__(self, attackName,damageRoll,status,name):
         self.attackName = attackName
         self.damageRoll = damageRoll
         self.status = status
+        self.name = name
 
 #Variables
 currentEnemy = None
@@ -141,28 +114,45 @@ skill = None
 inCombat = False
 
 #Characters
-construct = Character("Construct",70,70,3,5,8,None,None)
+construct = Character("Construct",75,75,3,5,12,None,None)
+pyro = Character("Pyro",70,70,5,3,11,None,None)
+goblin = Character("Goblin",65,65,4,4,9,None,None)
 
 #Enemies
-owlBear = Enemy("Owl Bear",120,120,6,2,9,10,25,"bleed","poison",None,None)
-enemyList = [owlBear]
+wizard = Enemy("Wizard",50,50,2,6,9,10,6,None,"burn",None,None)
+golem = Enemy("Golem",100,100,6,1,13,5,20,None,None,None,None)
+asj = Enemy("Arkeyan Shield Juggernaught",90,90,6,2,14,10,15,None,None,None,None)
+dragon = Enemy("AGHEEL THE GREAT FLYING DRAGON!!!",200,200,5,5,13,15,20,None,"burn",None,None)
+enemyList = [wizard,golem,asj,dragon]
 
 #Weapons
-sword = Weapon("Slash",15,None)
+sword = Weapon("Sword Slash",15,None,"Sword")
+fireAxe = Weapon("Axe Swing",20,None,"Fire Axe")
+dagger = Weapon("Dagger Stab",8,None,"Dagger")
 
 #Skills
-overheat = Skill("Overheat",10,"burn")
+electrify = Skill("Electric Shock",20,"shock","Electrify")
+fireBlast = Skill("Fire Blast",5,"burn","Fire Blast")
+poisonPotion = Skill("Poison Potion",5,"poison","Poison Potion")
 
 #Combat
 def chooseCharacter():
     global currentCharacter
     global skill
     global heldWeapon
-    heldWeapon = sword
-    characterChoice = int(input("Choose a character (1) Construct: "))
+    characterChoice = int(input("Choose a character (1)Construct (2)Pyro (3)Goblin : "))
     if characterChoice == 1:
         currentCharacter = construct
-        skill = overheat
+        skill = electrify
+        heldWeapon = sword
+    elif characterChoice == 2:
+        currentCharacter = pyro
+        skill = fireBlast
+        heldWeapon = fireAxe
+    elif characterChoice == 3:
+        currentCharacter = goblin
+        skill = daggerThrow
+        heldWeapon = dagger
     else:
         chooseCharacter()
 
@@ -205,6 +195,15 @@ def playerWeaponAttack():
     dodgeRoll = random.randint(1,20)
     if dodgeRoll > currentEnemy.ac:
         damage = random.randint(1,heldWeapon.damageRoll) + currentCharacter.strength
+        if currentCharacter.currentStatus == "shock":
+            damage = round(damage * 0.5)
+            print("You are shocked")
+            currentCharacter.statusLevel -= 1
+            if currentCharacter.statusLevel < 1:
+                print("You no longer shocked")
+                currentCharacter.statusLevel = 0
+                currentCharacter.currentStatus = None
+            time.sleep(1)
         currentEnemy.dealDamage(damage)
         print("You deal ", damage, "damage")
         if heldWeapon.status == "burn":
@@ -222,6 +221,11 @@ def playerWeaponAttack():
             currentEnemy.statusLevel = 5
             print("You inflict Bleed")
             time.sleep(1)
+        if heldWeapon.status == "shock":
+            currentEnemy.currentStatus = "shock"
+            currentEnemy.statusLevel = 3
+            print("You inflict Shock")
+            time.sleep(1)
     else:
         print("You miss")
     time.sleep(1)
@@ -233,6 +237,15 @@ def playerMagicAttack():
     dodgeRoll = random.randint(1,20) + currentCharacter.magic
     if dodgeRoll > currentEnemy.ac:
         damage = random.randint(1,skill.damageRoll)
+        if currentCharacter.currentStatus == "shock":
+            damage = round(damage * 0.5)
+            print("You are shocked")
+            currentCharacter.statusLevel -= 1
+            if currentCharacter.statusLevel < 1:
+                print("You no longer shocked")
+                currentCharacter.statusLevel = 0
+                currentCharacter.currentStatus = None
+            time.sleep(1)
         currentEnemy.dealDamage(damage)
         print("You deal ", damage, "damage")
         if skill.status == "burn":
@@ -249,6 +262,11 @@ def playerMagicAttack():
             currentEnemy.currentStatus = "bleed"
             currentEnemy.statusLevel = 5
             print("You inflict Bleed")
+            time.sleep(1)
+        if skill.status == "shock":
+            currentEnemy.currentStatus = "shock"
+            currentEnemy.statusLevel = 3
+            print("You inflict Shock")
             time.sleep(1)
     else:
         print("You miss")
@@ -270,8 +288,17 @@ def enemyWeaponAttack():
     dodgeRoll = random.randint(1,20)
     if dodgeRoll > currentCharacter.ac:
         damage = random.randint(1,currentEnemy.strengthRoll) + currentEnemy.strength
+        if currentEnemy.currentStatus == "shock":
+            damage = round(damage * 0.5)
+            print(currentEnemy.name," is shocked")
+            currentEnemy.statusLevel -= 1
+            if currentEnemy.statusLevel < 1:
+                print(currentEnemy.name," is no longer shocked")
+                currentEnemy.statusLevel = 0
+                currentEnemy.currentStatus = None
+            time.sleep(1)
         currentCharacter.dealDamage(damage)
-        print(currentEnemy.name, " dealt ", damage, "damage")
+        print(currentEnemy.name, " dealt ", damage, " melee damage")
         if currentEnemy.strengthStatus == "burn":
             currentCharacter.currentStatus = "burn"
             currentCharacter.statusLevel = 10
@@ -287,6 +314,11 @@ def enemyWeaponAttack():
             currentCharacter.statusLevel = 5
             print(currentEnemy.name," inflicts Bleed")
             time.sleep(1)
+        if currentEnemy.strengthStatus == "shock":
+            currentCharacter.currentStatus = "shock"
+            currentCharacter.statusLevel = 3
+            print(currentEnemy.name," inflicts Shock")
+            time.sleep(1)
     else:
         print(currentEnemy.name," missed")
     time.sleep(1)
@@ -297,8 +329,17 @@ def enemyMagicAttack():
     dodgeRoll = random.randint(1,20) + currentEnemy.magic
     if dodgeRoll > currentCharacter.ac:
         damage = random.randint(1,currentEnemy.magicRoll)
+        if currentEnemy.currentStatus == "shock":
+            damage = round(damage * 0.5)
+            print(currentEnemy.name," is shocked")
+            currentEnemy.statusLevel -= 1
+            if currentEnemy.statusLevel < 1:
+                print(currentEnemy.name," is no longer shocked")
+                currentEnemy.statusLevel = 0
+                currentEnemy.currentStatus = None
+            time.sleep(1)
         currentCharacter.dealDamage(damage)
-        print(currentEnemy.name," dealt ", damage, "damage")
+        print(currentEnemy.name," dealt ", damage, " magic damage")
         if currentEnemy.magicStatus == "burn":
             currentCharacter.currentStatus = "burn"
             currentCharacter.statusLevel = 10
@@ -311,8 +352,13 @@ def enemyMagicAttack():
             time.sleep(1)
         if currentEnemy.magicStatus == "bleed":
             currentCharacter.currentStatus = "bleed"
-            currentCharacter.statusLevel = 10
+            currentCharacter.statusLevel = 5
             print(currentEnemy.name," inflicts Bleed")
+            time.sleep(1)
+        if currentEnemy.magicStatus == "shock":
+            currentCharacter.currentStatus = "shock"
+            currentCharacter.statusLevel = 3
+            print(currentEnemy.name," inflicts Shock")
             time.sleep(1)
     else:
         print(currentEnemy.name," missed")
@@ -361,4 +407,13 @@ def checkStatusEnemy():
             currentEnemy.bleed()
 
 chooseCharacter()
-startCombat(owlBear)
+startCombat(wizard)
+currentCharacter.hp = currentCharacter.hpMax
+time.sleep(3)
+startCombat(golem)
+currentCharacter.hp = currentCharacter.hpMax
+time.sleep(3)
+startCombat(asj)
+currentCharacter.hp = currentCharacter.hpMax
+time.sleep(3)
+startCombat(dragon)
