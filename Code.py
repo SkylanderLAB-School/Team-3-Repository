@@ -409,17 +409,11 @@ def checkStatusEnemy():
 chooseCharacter()
 startCombat(wizard)
 currentCharacter.hp = currentCharacter.hpMax
-currentCharacter.currentStatus = None
-currentCharacter.statusLevel = 0
 time.sleep(3)
 startCombat(golem)
 currentCharacter.hp = currentCharacter.hpMax
-currentCharacter.currentStatus = None
-currentCharacter.statusLevel = 0
 time.sleep(3)
 startCombat(asj)
 currentCharacter.hp = currentCharacter.hpMax
-currentCharacter.currentStatus = None
-currentCharacter.statusLevel = 0
 time.sleep(3)
 startCombat(dragon)
