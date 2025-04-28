@@ -212,7 +212,7 @@ def playerWeaponAttack():
             time.sleep(1)
         currentEnemy.dealDamage(damage)
         print("You deal ", damage, "damage")
-        if currentEnemy.currentStaus == None:
+        if currentEnemy.currentStatus == None:
             if heldWeapon.status == "burn":
                 currentEnemy.currentStatus = "burn"
                 currentEnemy.statusLevel = 10
@@ -255,7 +255,7 @@ def playerMagicAttack():
             time.sleep(1)
         currentEnemy.dealDamage(damage)
         print("You deal ", damage, "damage")
-        if currentEnemy.currentStaus == None:
+        if currentEnemy.currentStatus == None:
             if skill.status == "burn":
                 currentEnemy.currentStatus = "burn"
                 currentEnemy.statusLevel = 10
@@ -307,7 +307,7 @@ def enemyWeaponAttack():
             time.sleep(1)
         currentCharacter.dealDamage(damage)
         print(currentEnemy.name, " dealt ", damage, " melee damage")
-        if currentCharacter.currentStaus == None:
+        if currentCharacter.currentStatus == None:
             if currentEnemy.strengthStatus == "burn":
                 currentCharacter.currentStatus = "burn"
                 currentCharacter.statusLevel = 10
@@ -349,7 +349,7 @@ def enemyMagicAttack():
             time.sleep(1)
         currentCharacter.dealDamage(damage)
         print(currentEnemy.name," dealt ", damage, " magic damage")
-        if currentCharacter.currentStaus == None:
+        if currentCharacter.currentStatus == None:
             if currentEnemy.magicStatus == "burn":
                 currentCharacter.currentStatus = "burn"
                 currentCharacter.statusLevel = 10
