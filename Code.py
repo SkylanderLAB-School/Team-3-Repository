@@ -206,26 +206,27 @@ def playerWeaponAttack():
             time.sleep(1)
         currentEnemy.dealDamage(damage)
         print("You deal ", damage, "damage")
-        if heldWeapon.status == "burn":
-            currentEnemy.currentStatus = "burn"
-            currentEnemy.statusLevel = 10
-            print("You inflict Burn")
-            time.sleep(1)
-        if heldWeapon.status == "poison":
-            currentEnemy.currentStatus = "poison"
-            currentEnemy.statusLevel = 10
-            print("You inflict Poison")
-            time.sleep(1)
-        if heldWeapon.status == "bleed":
-            currentEnemy.currentStatus = "bleed"
-            currentEnemy.statusLevel = 5
-            print("You inflict Bleed")
-            time.sleep(1)
-        if heldWeapon.status == "shock":
-            currentEnemy.currentStatus = "shock"
-            currentEnemy.statusLevel = 3
-            print("You inflict Shock")
-            time.sleep(1)
+        if currentEnemy.currentStaus == None:
+            if heldWeapon.status == "burn":
+                currentEnemy.currentStatus = "burn"
+                currentEnemy.statusLevel = 10
+                print("You inflict Burn")
+                time.sleep(1)
+            if heldWeapon.status == "poison":
+                currentEnemy.currentStatus = "poison"
+                currentEnemy.statusLevel = 10
+                print("You inflict Poison")
+                time.sleep(1)
+            if heldWeapon.status == "bleed":
+                currentEnemy.currentStatus = "bleed"
+                currentEnemy.statusLevel = 5
+                print("You inflict Bleed")
+                time.sleep(1)
+            if heldWeapon.status == "shock":
+                currentEnemy.currentStatus = "shock"
+                currentEnemy.statusLevel = 3
+                print("You inflict Shock")
+                time.sleep(1)
     else:
         print("You miss")
     time.sleep(1)
@@ -248,26 +249,27 @@ def playerMagicAttack():
             time.sleep(1)
         currentEnemy.dealDamage(damage)
         print("You deal ", damage, "damage")
-        if skill.status == "burn":
-            currentEnemy.currentStatus = "burn"
-            currentEnemy.statusLevel = 10
-            print("You inflict Burn")
-            time.sleep(1)
-        if skill.status == "poison":
-            currentEnemy.currentStatus = "poison"
-            currentEnemy.statusLevel = 10
-            print("You inflict Poison")
-            time.sleep(1)
-        if skill.status == "bleed":
-            currentEnemy.currentStatus = "bleed"
-            currentEnemy.statusLevel = 5
-            print("You inflict Bleed")
-            time.sleep(1)
-        if skill.status == "shock":
-            currentEnemy.currentStatus = "shock"
-            currentEnemy.statusLevel = 3
-            print("You inflict Shock")
-            time.sleep(1)
+        if currentEnemy.currentStaus == None:
+            if skill.status == "burn":
+                currentEnemy.currentStatus = "burn"
+                currentEnemy.statusLevel = 10
+                print("You inflict Burn")
+                time.sleep(1)
+            if skill.status == "poison":
+                currentEnemy.currentStatus = "poison"
+                currentEnemy.statusLevel = 10
+                print("You inflict Poison")
+                time.sleep(1)
+            if skill.status == "bleed":
+                currentEnemy.currentStatus = "bleed"
+                currentEnemy.statusLevel = 5
+                print("You inflict Bleed")
+                time.sleep(1)
+            if skill.status == "shock":
+                currentEnemy.currentStatus = "shock"
+                currentEnemy.statusLevel = 3
+                print("You inflict Shock")
+                time.sleep(1)
     else:
         print("You miss")
     time.sleep(1)
@@ -299,26 +301,27 @@ def enemyWeaponAttack():
             time.sleep(1)
         currentCharacter.dealDamage(damage)
         print(currentEnemy.name, " dealt ", damage, " melee damage")
-        if currentEnemy.strengthStatus == "burn":
-            currentCharacter.currentStatus = "burn"
-            currentCharacter.statusLevel = 10
-            print(currentEnemy.name," inflicts Burn")
-            time.sleep(1)
-        if currentEnemy.strengthStatus == "poison":
-            currentCharacter.currentStatus = "poison"
-            currentCharacter.statusLevel = 10
-            print(currentEnemy.name," inflicts Poison")
-            time.sleep(1)
-        if currentEnemy.strengthStatus == "bleed":
-            currentCharacter.currentStatus = "bleed"
-            currentCharacter.statusLevel = 5
-            print(currentEnemy.name," inflicts Bleed")
-            time.sleep(1)
-        if currentEnemy.strengthStatus == "shock":
-            currentCharacter.currentStatus = "shock"
-            currentCharacter.statusLevel = 3
-            print(currentEnemy.name," inflicts Shock")
-            time.sleep(1)
+        if currentCharacter.currentStaus == None:
+            if currentEnemy.strengthStatus == "burn":
+                currentCharacter.currentStatus = "burn"
+                currentCharacter.statusLevel = 10
+                print(currentEnemy.name," inflicts Burn")
+                time.sleep(1)
+            if currentEnemy.strengthStatus == "poison":
+                currentCharacter.currentStatus = "poison"
+                currentCharacter.statusLevel = 10
+                print(currentEnemy.name," inflicts Poison")
+                time.sleep(1)
+            if currentEnemy.strengthStatus == "bleed":
+                currentCharacter.currentStatus = "bleed"
+                currentCharacter.statusLevel = 5
+                print(currentEnemy.name," inflicts Bleed")
+                time.sleep(1)
+            if currentEnemy.strengthStatus == "shock":
+                currentCharacter.currentStatus = "shock"
+                currentCharacter.statusLevel = 3
+                print(currentEnemy.name," inflicts Shock")
+                time.sleep(1)
     else:
         print(currentEnemy.name," missed")
     time.sleep(1)
@@ -340,26 +343,27 @@ def enemyMagicAttack():
             time.sleep(1)
         currentCharacter.dealDamage(damage)
         print(currentEnemy.name," dealt ", damage, " magic damage")
-        if currentEnemy.magicStatus == "burn":
-            currentCharacter.currentStatus = "burn"
-            currentCharacter.statusLevel = 10
-            print(currentEnemy.name," inflicts Burn")
-            time.sleep(1)
-        if currentEnemy.magicStatus == "poison":
-            currentCharacter.currentStatus = "poison"
-            currentCharacter.statusLevel = 10
-            print(currentEnemy.name," inflicts Poison")
-            time.sleep(1)
-        if currentEnemy.magicStatus == "bleed":
-            currentCharacter.currentStatus = "bleed"
-            currentCharacter.statusLevel = 5
-            print(currentEnemy.name," inflicts Bleed")
-            time.sleep(1)
-        if currentEnemy.magicStatus == "shock":
-            currentCharacter.currentStatus = "shock"
-            currentCharacter.statusLevel = 3
-            print(currentEnemy.name," inflicts Shock")
-            time.sleep(1)
+        if currentCharacter.currentStaus == None:
+            if currentEnemy.magicStatus == "burn":
+                currentCharacter.currentStatus = "burn"
+                currentCharacter.statusLevel = 10
+                print(currentEnemy.name," inflicts Burn")
+                time.sleep(1)
+            if currentEnemy.magicStatus == "poison":
+                currentCharacter.currentStatus = "poison"
+                currentCharacter.statusLevel = 10
+                print(currentEnemy.name," inflicts Poison")
+                time.sleep(1)
+            if currentEnemy.magicStatus == "bleed":
+                currentCharacter.currentStatus = "bleed"
+                currentCharacter.statusLevel = 5
+                print(currentEnemy.name," inflicts Bleed")
+                time.sleep(1)
+            if currentEnemy.magicStatus == "shock":
+                currentCharacter.currentStatus = "shock"
+                currentCharacter.statusLevel = 3
+                print(currentEnemy.name," inflicts Shock")
+                time.sleep(1)
     else:
         print(currentEnemy.name," missed")
     time.sleep(1)
