@@ -123,7 +123,13 @@ wizard = Enemy("Wizard",50,50,2,6,9,10,6,None,"burn",None,None)
 golem = Enemy("Golem",100,100,6,1,13,5,20,None,None,None,None)
 asj = Enemy("Arkeyan Shield Juggernaught",90,90,6,2,14,10,15,None,None,None,None)
 dragon = Enemy("AGHEEL THE GREAT FLYING DRAGON!!!",200,200,5,5,13,15,20,None,"burn",None,None)
-enemyList = [wizard,golem,asj]
+filth = Enemy("Filth", 1, 1, 1, 66, 6, 30,70,None,"poison",None,None)
+fbc = Enemy("Fire Breathing Crocodile", 90, 90, 5, 2, 12, 10,25,"bleed","burn",None,None)
+sharkMan = Enemy("Shark Man", 80, 80, 5, 3, 11, 8,20,None,"shock",None,None)
+b33 = Enemy("Heavy Drone B-33", 55, 55, 1, 6, 4, 15,5,None,"bleed",None,None)
+
+
+enemyList = [wizard,golem,asj,sharkMan,fbc,filth,b33]
 bossList = [dragon]
 #Weapons
 sword = Weapon("Sword Slash",15,None,"Sword")
