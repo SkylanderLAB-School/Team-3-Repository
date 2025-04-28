@@ -123,8 +123,8 @@ wizard = Enemy("Wizard",50,50,2,6,9,10,6,None,"burn",None,None)
 golem = Enemy("Golem",100,100,6,1,13,5,20,None,None,None,None)
 asj = Enemy("Arkeyan Shield Juggernaught",90,90,6,2,14,10,15,None,None,None,None)
 dragon = Enemy("AGHEEL THE GREAT FLYING DRAGON!!!",200,200,5,5,13,15,20,None,"burn",None,None)
-enemyList = [wizard,golem,asj,dragon]
-
+enemyList = [wizard,golem,asj]
+bossList = [dragon]
 #Weapons
 sword = Weapon("Sword Slash",15,None,"Sword")
 fireAxe = Weapon("Axe Swing",20,None,"Fire Axe")
@@ -411,19 +411,19 @@ def checkStatusEnemy():
             currentEnemy.bleed()
 
 chooseCharacter()
-startCombat(wizard)
+startCombat(random.choice(enemyList))
 currentCharacter.hp = currentCharacter.hpMax
 currentCharacter.currentStatus = None
 currentCharacter.statusLevel = 0
 time.sleep(3)
-startCombat(golem)
+startCombat(random.choice(enemyList))
 currentCharacter.hp = currentCharacter.hpMax
 currentCharacter.currentStatus = None
 currentCharacter.statusLevel = 0
 time.sleep(3)
-startCombat(asj)
+startCombat(random.choice(enemyList))
 currentCharacter.hp = currentCharacter.hpMax
 currentCharacter.currentStatus = None
 currentCharacter.statusLevel = 0
 time.sleep(2)
-startCombat(dragon)
+startCombat(random.choice(bossList))
