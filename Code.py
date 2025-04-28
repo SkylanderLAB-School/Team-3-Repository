@@ -409,6 +409,21 @@ def checkStatusEnemy():
             currentEnemy.poison()
         if currentEnemy.currentStatus == "bleed":
             currentEnemy.bleed()
+#upgrades
+def chooseUpgrade():
+    global currentCharacter
+    upgradeChoice = int(input("Which would you like to upgrade (1)HP (2)Defense (3)Strength (4)Magic : "))
+    if upgradeChoice == 1:
+        currentCharacter.hpMax += 10
+        currentCharacter.hp = currentCharacter.hpMax
+    elif upgradeChoice == 2:
+        currentCharacter.ac += 1
+    elif upgradeChoice == 3:
+        currentCharacter.strength += 1
+    elif upgradeChoice == 4:
+        currentCharacter.magic += 1
+    else:
+        chooseUpgrade()
 
 chooseCharacter()
 startCombat(random.choice(enemyList))
@@ -416,14 +431,20 @@ currentCharacter.hp = currentCharacter.hpMax
 currentCharacter.currentStatus = None
 currentCharacter.statusLevel = 0
 time.sleep(3)
-startCombat(random.choice(enemyList))
-currentCharacter.hp = currentCharacter.hpMax
-currentCharacter.currentStatus = None
-currentCharacter.statusLevel = 0
+chooseUpgrade()
 time.sleep(3)
 startCombat(random.choice(enemyList))
 currentCharacter.hp = currentCharacter.hpMax
 currentCharacter.currentStatus = None
 currentCharacter.statusLevel = 0
-time.sleep(2)
+time.sleep(3)
+chooseUpgrade()
+time.sleep(3)
+startCombat(random.choice(enemyList))
+currentCharacter.hp = currentCharacter.hpMax
+currentCharacter.currentStatus = None
+currentCharacter.statusLevel = 0
+time.sleep(3)
+chooseUpgrade()
+time.sleep(3)
 startCombat(random.choice(bossList))
